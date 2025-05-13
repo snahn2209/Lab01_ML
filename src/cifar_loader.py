@@ -11,7 +11,7 @@ def load_batch(file_path):
         labels = data_dict[b'labels']
         return data, labels
 
-# a) Lade alle Trainingsdaten
+# a) load all training data
 def load_training_data(directory):
     Xtr_list = [] # trainingsdaten
     Ytr_list = [] # labels
@@ -24,7 +24,7 @@ def load_training_data(directory):
     Ytr = np.concatenate(Ytr_list)
     return Xtr, Ytr
 
-# b) Lade Testdaten
+# b) load all test data
 def load_test_data(directory):
     test_path = os.path.join(directory, 'test_batch')
     data, labels = load_batch(test_path)
@@ -32,13 +32,13 @@ def load_test_data(directory):
     Yte = np.array(labels)
     return Xte, Yte
 
-# c) Bild aus 3072-Vektor rekonstruieren und anzeigen
+# c) recunstruct image from 3072 and show
 def show_image(img_vector):
     img = img_vector.reshape(3, 32, 32).transpose(1, 2, 0)
     return img
 
 """
-# Vorbereitung Test
+# test Vorbereitung
 if __name__ == '__main__':
     cifar_dir = '../cifar-10-batches-py'  # Passe ggf. den Pfad an
 

@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt # for creating visualizations
+import time
 from sklearn.metrics import accuracy_score
 from cifar_loader import load_training_data, load_test_data, show_image
 
@@ -7,11 +8,11 @@ from cifar_loader import load_training_data, load_test_data, show_image
 class_names = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 # load data and create test sample
-print("lade trainingsdaten...")
+print("load trainings data...")
 train_data, train_labels = load_training_data("../cifar-10-batches-py")
-print("lade testdaten...")
+print("load test data...")
 test_data, test_labels = load_test_data("../cifar-10-batches-py")
-sample_size = 10000
+sample_size = 100
 test_sample = test_data[:sample_size,]
 test_sample_labels = test_labels[:sample_size,]
 
@@ -60,6 +61,7 @@ distance_types = ['l1', 'l2']
 """
 results = {}
 
+start_time = time.time()
 # for each distance metric (l1/l2)
 for dist in distance_types:
     # create figure
@@ -101,5 +103,8 @@ plt.xticks(ks)
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-
 plt.show()
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(f"\n⏱️ time needed: {elapsed_time:.2f} sec")
