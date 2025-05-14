@@ -1,3 +1,4 @@
+# this script was partially created with the assistance of ChatGPT
 import numpy as np
 import matplotlib.pyplot as plt # for creating visualizations
 import time
@@ -67,19 +68,19 @@ for dist in distance_types:
     # create figure
     fig, axes = plt.subplots(len(ks), 10, figsize=(20, 8))
     fig.suptitle(f"predictions with {dist.upper()} for k=1,3,5,7")
-    
+
     for k_idx, k in enumerate(ks):
         print(f"computing {dist} for k={k}")
         #create and train knn model
         knn = KNN(k=k, distance=dist)
         knn.fit(train_data, train_labels)
-        
+
         # make prredictions for Test sample
         preds = knn.predict(test_sample)
         # calculate accuracy
         acc = accuracy_score(test_sample_labels, preds) #returns float between 0.0 and 1.0 (compares test_sample_labels with actual predictions)
         results.setdefault(dist, []).append(acc)
-        
+
         # Plot first 10 predictions
         for i in range(10):
             ax = axes[k_idx, i]
@@ -100,6 +101,8 @@ plt.title("K vs. Accuracy for L1 and L2")
 plt.xlabel("K")
 plt.ylabel("Accuracy")
 plt.xticks(ks)
+plt.ylim(0.17, 0.30)  # Set y-axis limits from 0.17 to 0.30
+plt.yticks(np.arange(0.17, 0.31, 0.01))  # Set y-axis ticks in steps of 0.01
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
